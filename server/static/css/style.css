@@ -15,7 +15,7 @@ a {
 }
 
 a:hover {
-  color: #1976d2;
+  color: #19d2c3;
 }
 
 .text-center {
@@ -24,7 +24,7 @@ a:hover {
 
 .top-bar {
   padding: 10px 15px;
-  margin-bottom: 50px;
+  background-color: #E5E5E5;
 }
 .top-bar::after {
   content: '';
@@ -72,6 +72,7 @@ a:hover {
 
 .hero {
   height: 500px;
+  width: 100%;
   background-size: cover;
   background-position: center;
   position: relative;
