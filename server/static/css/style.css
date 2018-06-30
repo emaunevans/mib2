@@ -3,6 +3,10 @@ body {
   font-size: 16px;
 }
 
+.navbar{ 
+  color:darkblue 
+}
+
 a {
   color: #00bcd4;
   font-weight: bold;
@@ -96,7 +100,7 @@ a:hover {
 
 .hero h1 {
   font-size: 60px;
-  padding-top: 140px;
+  padding-top: 60px;
   margin-top: 0;
 }
 
