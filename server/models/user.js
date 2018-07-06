@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
       ref: "Message"
     }
   ],
-  messages_seen: [
+  messages_received: [
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,

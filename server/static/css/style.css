@@ -11,11 +11,11 @@ a {
   color: #00bcd4;
   font-weight: bold;
   text-decoration: none;
-  transition: color 0.4s;
+  transition: color 0.9s;
 }
 
 a:hover {
-  color: #19d2c3;
+  color: #6ca8b0;
 }
 
 .text-center {
@@ -26,6 +26,7 @@ a:hover {
   padding: 10px 15px;
   background-color: #E5E5E5;
 }
+
 .top-bar::after {
   content: '';
   display: block;
@@ -35,6 +36,7 @@ a:hover {
 .top-bar-left {
   float: left;
   font-size: 1.5em;
+ 
 }
 
 .top-bar-right {
@@ -44,6 +46,7 @@ a:hover {
 .top-bar a,
 .nav a {
   margin: 0 8px;
+  color: #4c5f74;
 }
 
 .container {
@@ -58,6 +61,8 @@ a:hover {
 
 .field-line, .button-line {
   padding: 16px;
+  color:#4c5f74;
+  opacity: none;
 }
 
 .error-message {
@@ -95,9 +100,6 @@ a:hover {
   z-index: 2;
 }
 
-.hero h1, .hero h2 {
-  color: white;
-}
 
 .hero h1 {
   font-size: 60px;
