@@ -20,6 +20,10 @@ import DashboardPage from './containers/DashboardPage.jsx';
 import SendBottlePage from './containers/SendBottlePage.jsx';
 import Footer from "./components/Footer";
 import Auth from './modules/Auth';
+import SavedMessages from './containers/SavedMessages.jsx';
+import NewBottle from './containers/NewBottle.jsx';
+
+
 
 // remove tap delay, essential for MaterialUI to work properly
 injectTapEventPlugin();
@@ -86,7 +90,6 @@ class Main extends Component {
               {this.state.authenticated ? (
                 <div className="top-bar-right">
                   <Link to="/dashboard">Dashboard</Link>
-                  <Link to="/messages">Message</Link>
                   <Link to="/logout">Log out</Link>
                 </div>
               ) : (
@@ -101,6 +104,10 @@ class Main extends Component {
             <PropsRoute exact path="/" component={HomePage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
             <PrivateRoute path="/dashboard" component={DashboardPage} />
             <PrivateRoute path="/messages" component={SendBottlePage} />
+            <PrivateRoute path="/savedmessages" component={SavedMessages} />
+            <PrivateRoute path="/newbottles" component={NewBottle} />
+
+
             <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
             <LoggedOutRoute path="/signup" component={SignUpPage} />
             <Route path="/logout" render={
