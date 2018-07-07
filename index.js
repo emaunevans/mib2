@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config');
+const path = require('path');
 
 // connect to the database and load models
 require('./server/models').connect(config.dbUri);
@@ -30,9 +31,17 @@ app.use('/api', authCheckMiddleware);
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 const messageRoutes = require('./server/routes/sendbottle');
+const receivedRoutes = require('./server/routes/messages_received');
+const throwbackroute = require('./server/routes/throwback.js')
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/sendbottle', messageRoutes);
+app.use('/received', receivedRoutes);
+app.use('/throwback', throwbackroute);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/server/static/index.html'));
+});
 
 // Set Port, hosting services will look for process.env.PORT
 app.set('port', (process.env.PORT || 3000));

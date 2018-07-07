@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SendBottleForm from '../pages/SendBottleForm.jsx';
+var store = require('store')
+
 
 
 class SendBottlePage extends React.Component {
@@ -14,18 +16,24 @@ class SendBottlePage extends React.Component {
     // set the initial component state
     this.state = {
       errors: {},
-      user: {
-        title: '',
-        email: '',
-        name: '',
-        message: ''
-      }
+      user: {}
     };
+
 
     this.processForm = this.processForm.bind(this);
     this.changeUser = this.changeUser.bind(this);
   }
-
+  componentDidMount() {
+    if (store.get('bottle')) {
+      let bottle = store.get('bottle')
+      this.setState({
+        user: {
+          title: bottle.title,
+          message: bottle.message
+        }
+      });
+    }
+  }
   /**
    * Process the form.
    *
@@ -34,14 +42,15 @@ class SendBottlePage extends React.Component {
   processForm(event) {
     // prevent default action. in this case, action is the form submission event
     event.preventDefault();
+    store.remove('bottle');
 
     // create a string for an HTTP body message
-    const name = encodeURIComponent(this.state.user.name);
     const title = encodeURIComponent(this.state.user.title);
-    const email = encodeURIComponent(this.state.user.email);
+    const email = encodeURIComponent(localStorage.email);
     const message = encodeURIComponent(this.state.user.message);
     const formData = `name=${name}&email=${email}&message=${message}&title=${title}`;
-    console.log(formData);
+    localStorage.title = title;
+    localStorage.message = message;
     // create an AJAX request
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/sendbottle/messages');
@@ -53,7 +62,14 @@ class SendBottlePage extends React.Component {
 
         // change the component-container state
         this.setState({
-          errors: {}
+          errors: {},
+          user: {
+            title: "",
+            message: ""
+          },
+          title: '',
+          email: '',
+          message: ''
         });
 
         // set a message
@@ -71,7 +87,10 @@ class SendBottlePage extends React.Component {
           errors
         });
       }
+
     });
+
+    console.log(formData);
     xhr.send(formData);
   }
 
@@ -86,7 +105,13 @@ class SendBottlePage extends React.Component {
     user[field] = event.target.value;
 
     this.setState({
-      user
+      user: user
+
+    });
+    store.set('bottle', {
+      title: this.state.user.title,
+      message: this.state.user.message,
+
     });
   }
 
@@ -100,6 +125,7 @@ class SendBottlePage extends React.Component {
         onChange={this.changeUser}
         errors={this.state.errors}
         user={this.state.user}
+        email={this.state.email}
       />
     );
   }
